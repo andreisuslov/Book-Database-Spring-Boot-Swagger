@@ -1,4 +1,4 @@
-# VideoGameDB
+# BookDB
 Book Database application with API endpoints that support **JSON** and **XML** data types.
 
 
