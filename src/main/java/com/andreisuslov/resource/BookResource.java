@@ -34,7 +34,7 @@ public class BookResource {
     @ApiOperation(value = "Get List of all books", notes = "Returns all the books in the DB", response = Book.class, responseContainer = "List")
     public List<Book> listBooks() {
 
-        String sql = "select * from BOOK";
+        String sql = "SELECT * FROM BOOK";
 
         return namedParameterJdbcTemplate.query(sql, new BookMapper());
     }
@@ -44,7 +44,7 @@ public class BookResource {
     @ApiOperation(value = "Get a single book by ID", notes = "Returns the details of a single book by ID", response = Book.class)
     public Book getBook(
             @ApiParam(value = "The book ID", required = true) @PathParam("bookId") Integer bookId) {
-        String sql = "select * from BOOK where id=:bookId";
+        String sql = "SELECT * FROM BOOK WHERE id=:bookId";
         SqlParameterSource namedParameters = new MapSqlParameterSource("bookId", bookId);
         return namedParameterJdbcTemplate.query(sql, namedParameters, new BookMapper()).get(0);
     }
@@ -52,7 +52,7 @@ public class BookResource {
     @POST
     @ApiOperation(value = "Add a new book", notes = "Add a new book to the DB")
     public String createBook(final Book book) {
-        String sql = "insert into BOOK values(:id, :name, :releaseDate, :reviewScore, :category, :rating)";
+        String sql = "INSERT INTO BOOK VALUES(:id, :name, :releaseDate, :reviewScore, :category, :rating)";
         SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(book);
         this.namedParameterJdbcTemplate.update(sql, namedParameters);
         return "{\"status\": \"Record Added Successfully\"}";
@@ -62,11 +62,11 @@ public class BookResource {
     @Path("/{bookId}")
     @ApiOperation(value = "Update a book", notes = "Update an existing book in the DB by specifying a new body ", response = Book.class)
     public Book editBook(final Book book, @PathParam("bookId") Integer bookId) {
-        String sql = "update BOOK set id=:id, name=:name, released_on=:releaseDate, review_score=:reviewScore, category=:category, rating=:rating where id=:id";
+        String sql = "UPDATE BOOK SET id=:id, name=:name, released_on=:releaseDate, review_score=:reviewScore, category=:category, rating=:rating WHERE id=:id";
         SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(book);
         this.namedParameterJdbcTemplate.update(sql, namedParameters);
 
-        sql = "select * from BOOK where id=:bookId";
+        sql = "SELECT * FROM BOOK WHERE id=:bookId";
         SqlParameterSource namedParameters2 = new MapSqlParameterSource("bookId", bookId);
         return namedParameterJdbcTemplate.query(sql, namedParameters2, new BookMapper()).get(0);
     }
@@ -76,10 +76,10 @@ public class BookResource {
     @ApiOperation(value = "Delete a book", notes = "Deletes a book from the DB by ID")
     public String deleteBook(
             @ApiParam(value = "The book ID", required = true) @PathParam("bookId") Integer bookId) {
-        String sql = "delete from BOOK where id =:bookId";
+        String sql = "DELETE FROM BOOK WHERE id =:bookId";
         SqlParameterSource namedParameters = new MapSqlParameterSource("bookId", bookId);
         this.namedParameterJdbcTemplate.update(sql, namedParameters);
-        return "{\"status\": \"Record Deleted Successfully\"}";
+        return "{\"status\": \"Record deleted successfully\"}";
     }
 
 
