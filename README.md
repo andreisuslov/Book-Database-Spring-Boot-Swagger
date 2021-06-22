@@ -1,6 +1,6 @@
-# BookDB
+# BookDB Application Under Test
 Book Database application with API endpoints that support **JSON** and **XML** data types.
-
+You can download the code and run this App to perform some testing on API endpoints.
 
 
 ### How to use from the command line
