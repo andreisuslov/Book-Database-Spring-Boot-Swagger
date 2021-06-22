@@ -3,7 +3,7 @@ Book Database application with API endpoints that support **JSON** and **XML** d
 
 
 
-# How to use from the command line
+### How to use from the command line
 You have two options:
 - **Gradle** - `./gradlew bootRun`
 - **Maven**  - `mvn spring-boot:run`
